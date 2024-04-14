@@ -3,12 +3,12 @@ package com.github.facestac;
 import java.util.Random;
 
 public class Bot extends Player{
-    Bot() {
-        super();
+    Bot(String name) {
+        super(name);
     }
 
-
-    protected String getShapeNumber() {
+    @Override
+    protected String getShapeNumber()  {
         Random r = new Random();
         int shapesCount = ShapesEnum.values().length;
 

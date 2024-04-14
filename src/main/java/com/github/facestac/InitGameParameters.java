@@ -1,22 +1,28 @@
 package com.github.facestac;
 
-public class InitShapes {
+public class InitGameParameters {
+    /**
+     * Игровые фигуры
+     */
+    static final Shape rock = new Shape(ShapesEnum.ROCK);
+    static final Shape paper = new Shape(ShapesEnum.PAPER);
+    static final Shape scissors = new Shape(ShapesEnum.SCISSORS);
 
-    static Shape rock = new Shape(ShapesEnum.ROCK);
-    static Shape paper = new Shape(ShapesEnum.PAPER);
-    static Shape scissors = new Shape(ShapesEnum.SCISSORS);
+    static final int MAX_SCORE = 5;
+    static final int NUMBER_OF_PLAYERS = 2;
 
     static {
+        setShapeOptions();
+    }
+
+    static private void setShapeOptions() {
         rock.setBeatsList(new ShapesEnum[] {ShapesEnum.SCISSORS});
-        rock.setDrawsList(new ShapesEnum[] {ShapesEnum.ROCK});
         rock.setLosesList(new ShapesEnum[] {ShapesEnum.PAPER});
 
         paper.setBeatsList(new ShapesEnum[] {ShapesEnum.ROCK});
-        paper.setDrawsList(new ShapesEnum[] {ShapesEnum.PAPER});
         paper.setLosesList(new ShapesEnum[] {ShapesEnum.SCISSORS});
 
         scissors.setBeatsList(new ShapesEnum[] {ShapesEnum.PAPER});
-        scissors.setDrawsList(new ShapesEnum[] {ShapesEnum.SCISSORS});
         scissors.setLosesList(new ShapesEnum[] {ShapesEnum.ROCK});
     }
 }

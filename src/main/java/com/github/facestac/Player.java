@@ -1,31 +1,32 @@
 package com.github.facestac;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
-    private int score;
+    protected String name;
     protected Shape shape;
+    private int score;
+
+    Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getScore() {
         return score;
     }
 
-//    public void setScore(int score) {
-//        this.score = score;
-//    }
-
-    public String getShape() {
-        return shape.getName().toString();
-    }
-
-
-
     public void setShape() {
         shape = switch(Integer.parseInt(getShapeNumber())) {
-            case 1 -> InitShapes.rock;
-            case 2 -> InitShapes.paper;
-            case 3 -> InitShapes.scissors;
+            case 1 -> InitGameParameters.rock;
+            case 2 -> InitGameParameters.paper;
+            case 3 -> InitGameParameters.scissors;
             default -> null;
         };
     }
@@ -33,18 +34,18 @@ public class Player {
     protected String getShapeNumber() {
         Scanner sc = new Scanner(System.in);
         String input;
-        String numberList = "";
+        List<String> numberList = new ArrayList<>();
         do {
             System.out.println("Choose one of the shapes:");
-            Integer i = 1;
+            int i = 1;
             for ( ShapesEnum shape: ShapesEnum.values()) {
-                numberList = numberList.concat(i.toString());
+                numberList.add(Integer.toString(i));
                 System.out.println(i++ + " - " + shape.name());
             }
             input =  sc.next();
 
             if (numberList.contains(input)) break;
-            else System.out.println("Incorrect input\n");;
+            else System.out.println("Incorrect input\n");
         } while (true);
 
         return input;
@@ -55,11 +56,17 @@ public class Player {
             score += 1;
             return 1;
         }
+
         if (Arrays.asList(shape.getLosesList()).contains(other.shape.getName())) {
             other.score += 1;
             return -1;
         }
 
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return name + " chooses: " + shape.getName();
     }
 }
