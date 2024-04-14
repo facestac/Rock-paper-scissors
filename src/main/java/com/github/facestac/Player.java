@@ -5,13 +5,36 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Класс игрока. Расширяется до класса Bot.
+ */
 public class Player {
+    /**
+     * Имя игрока
+     */
     protected String name;
+    /**
+     * Фигура (жест), которую покзывает игрок
+     */
     protected Shape shape;
+    /**
+     * Счет игрока
+     */
     private int score;
 
+    /**
+     * Конструктор класса
+     * @param name имя игрока
+     */
     Player(String name) {
         this.name = name;
+    }
+
+    /**
+     * геттеры и сеттеры
+     */
+    public void setShape() {
+        shape = InitGameParameters.shapeList.get(getShapeNumber());
     }
 
     public String getName() {
@@ -22,16 +45,22 @@ public class Player {
         return score;
     }
 
-    public void setShape() {
-        shape = switch(Integer.parseInt(getShapeNumber())) {
-            case 1 -> InitGameParameters.rock;
-            case 2 -> InitGameParameters.paper;
-            case 3 -> InitGameParameters.scissors;
-            default -> null;
-        };
+    /**
+     * Добавляет очки к текущему счету
+     * @param points количество очков для добавления
+     */
+    public void addScore(int points) {
+        this.score += points;
     }
 
-    protected String getShapeNumber() {
+
+    /**
+     * Пользовательсктй ввод. Проверка корректности ввода.
+     * Получаем фигуру по номеру, которую ввел игрок
+     *
+     * @return int значение ввода
+     */
+    protected int getShapeNumber() {
         Scanner sc = new Scanner(System.in);
         String input;
         List<String> numberList = new ArrayList<>();
@@ -48,23 +77,41 @@ public class Player {
             else System.out.println("Incorrect input\n");
         } while (true);
 
-        return input;
+        return Integer.parseInt(input) - 1;
     }
 
-    public int checkResult(Player other) {
-        if (Arrays.asList(shape.getBeatsList()).contains(other.shape.getName())) {
-            score += 1;
+    /**
+     * Проверяем, может ли текущая фигура побить другую
+     *
+     * @param other другая фигура, которую будем бить
+     * @return 1 - истина, 0 - ложь
+     */
+    public int isWinsAnother(Player other) {
+        if (Arrays.asList(shape.getBeatsList()).contains(other.shape.getName()))
             return 1;
-        }
-
-        if (Arrays.asList(shape.getLosesList()).contains(other.shape.getName())) {
-            other.score += 1;
-            return -1;
-        }
 
         return 0;
     }
 
+    /**
+     * Получаем количество игроков, которых смог победить текущий игрок
+     * @param otherPlayers список других игроков
+     * @return количество битых игроков
+     */
+    public int getNumberOfBeaten(List<Player> otherPlayers) {
+        int numBeaten = 0;
+        for (Player otherPlayer: otherPlayers) {
+            numBeaten += this.isWinsAnother(otherPlayer);
+        }
+
+        return numBeaten;
+    }
+
+    /**
+     * Перегрузка стандартного метода.
+     *
+     * @return возвращаем строку для вывода в удобной для нас форме (какую фигуру выбрал игрок)
+     */
     @Override
     public String toString() {
         return name + " chooses: " + shape.getName();
