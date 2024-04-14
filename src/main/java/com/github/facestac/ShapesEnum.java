@@ -1,6 +1,6 @@
 package com.github.facestac;
 
-public enum DefineShapes {
+public enum ShapesEnum {
     ROCK,
     PAPER,
     SCISSORS

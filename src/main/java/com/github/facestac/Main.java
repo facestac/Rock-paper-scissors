@@ -5,7 +5,7 @@ public class Main {
 
 //        Shape rock = new Rock();
           GameProcess gp = new GameProcess();
-          gp.gameLoop();
+          gp.gameInit();
 //        System.out.println(DefineShapes.values().length);
     }
 }

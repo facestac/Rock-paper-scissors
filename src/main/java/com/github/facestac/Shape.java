@@ -1,11 +1,41 @@
 package com.github.facestac;
 
-public interface Shape {
+public class Shape {
+    private ShapesEnum name;
+    private ShapesEnum[] beatsList;
+    private ShapesEnum[] drawsList;
+    private ShapesEnum[] losesList;
 
-//    String name;
+    Shape(ShapesEnum name) {
+        this.name = name;
+    }
 
-//    DefineShapes[] beats;
 
-//    String[] loses;
-    public void printShape();
+    public ShapesEnum[] getBeatsList() {
+        return beatsList;
+    }
+
+    public void setBeatsList(ShapesEnum[] beatsList) {
+        this.beatsList = beatsList;
+    }
+
+    public ShapesEnum[] getDrawsList() {
+        return drawsList;
+    }
+
+    public void setDrawsList(ShapesEnum[] drawsList) {
+        this.drawsList = drawsList;
+    }
+
+    public ShapesEnum[] getLosesList() {
+        return losesList;
+    }
+
+    public void setLosesList(ShapesEnum[] losesList) {
+        this.losesList = losesList;
+    }
+
+    public ShapesEnum getName() {
+        return name;
+    }
 }
