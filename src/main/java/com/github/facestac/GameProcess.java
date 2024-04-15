@@ -30,8 +30,8 @@ public class GameProcess {
         List<Player> players;
 
         do {
-            int mode = selectGameMode();
-            if (mode != 1) {
+            int gameMode = selectGameMode();
+            if (gameMode != 1) {
                 winningScore = setWinningScore();
                 playersCount = setNumberOfPlayers();
                 players = setPlayers(playersCount, 0);
@@ -39,7 +39,7 @@ public class GameProcess {
                 players = setPlayers(playersCount, 3);
             }
 
-            gameLoop(players);
+            gameLoop(players, gameMode);
 
 
             System.out.println("Start a new game? (y/n)");
@@ -55,7 +55,7 @@ public class GameProcess {
      * При завершении текущей игры, выводим информацию о победителях и количество раундов.
      * @param players список игроков
      */
-    public static void gameLoop(List<Player> players) {
+    public static void gameLoop(List<Player> players, int gameMode) {
         int round = 0;
         List<Player> winners;
 
@@ -71,11 +71,13 @@ public class GameProcess {
 
             printRoundInfo(players, winners);
 
-            synchronized (GameProcess.class) {
-                try {
-                    GameProcess.class.wait(InitGameParameters.DELAY_MSEC);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+            if (gameMode == 1) {
+                synchronized (GameProcess.class) {
+                    try {
+                        GameProcess.class.wait(InitGameParameters.DELAY_MSEC);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
