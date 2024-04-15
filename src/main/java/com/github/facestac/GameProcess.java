@@ -11,7 +11,7 @@ public class GameProcess {
     /**
      * Количество очков, которое необходимо набрать для победы
      */
-    static private int winningScore = InitGameParameters.MAX_SCORE;
+    private static int winningScore = InitGameParameters.MAX_SCORE;
 
     /**
      * Метод для запуска игры.
@@ -24,7 +24,7 @@ public class GameProcess {
      * победное колиство очков (может быть больше одного игрока).
      * После завершения текущей игры, можно начать новую игру или выйти из программы.
      */
-    static public void startGame() {
+    public static void startGame() {
         Scanner sc = new Scanner(System.in);
         int playersCount = InitGameParameters.NUMBER_OF_PLAYERS;
         List<Player> players;
@@ -55,7 +55,7 @@ public class GameProcess {
      * При завершении текущей игры, выводим информацию о победителях и количество раундов.
      * @param players список игроков
      */
-    static private void gameLoop(List<Player> players) {
+    public static void gameLoop(List<Player> players) {
         int round = 0;
         List<Player> winners;
 
@@ -70,6 +70,14 @@ public class GameProcess {
             if (!(winners.isEmpty() || winners.size() == players.size())) addPointsToWinners(winners);
 
             printRoundInfo(players, winners);
+
+            synchronized (GameProcess.class) {
+                try {
+                    GameProcess.class.wait(InitGameParameters.DELAY_MSEC);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
         } while (!isThereWinner(winners));
 
@@ -86,7 +94,7 @@ public class GameProcess {
      * 2 - игра с выбором параметров
      * @return номер режима игры
      */
-    static private int selectGameMode() {
+    private static int selectGameMode() {
         System.out.println("Select game mode:");
         System.out.println("1 - Quick game");
         System.out.println("2 - Customizable game");
@@ -101,7 +109,7 @@ public class GameProcess {
      * @param playerStatus статус игрока (1 - юзер: 2 - бот; 3 - все боты)
      * @return список игроков
      */
-    static private List<Player> setPlayers(int playersCount, int playerStatus) {
+    private static List<Player> setPlayers(int playersCount, int playerStatus) {
         List<Player> players = new ArrayList<>();
         int playerNumber = 1;
         int botNumber = 1;
@@ -129,7 +137,7 @@ public class GameProcess {
      * Задаем число очков, которое нужно набрать для победы (кастомный режим)
      * @return число очков для победы
      */
-    static private int setWinningScore() {
+    private static int setWinningScore() {
         System.out.println("Input the number of points to win (from 1 to 10)");
 
         return inputCorrectInteger(1, 10);
@@ -139,7 +147,7 @@ public class GameProcess {
      * Задаем количество игроков (кастомный режим)
      * @return количество игроков
      */
-    static private int setNumberOfPlayers() {
+    private static int setNumberOfPlayers() {
         System.out.println("Input the number of players (from 2 to 3)");
 
         return inputCorrectInteger(2, 3);
@@ -151,7 +159,7 @@ public class GameProcess {
      * @param maxValue максимальное згачение диапазона
      * @return введенное число
      */
-    static int inputCorrectInteger(int minValue, int maxValue) {
+    private static int inputCorrectInteger(int minValue, int maxValue) {
         Scanner sc = new Scanner(System.in);
         int inputValue;
 
@@ -163,6 +171,7 @@ public class GameProcess {
                 if (inputValue >= minValue && inputValue <= maxValue) break;
                 else System.out.println("Not in range. Try again.");
             }
+            sc.nextLine();
         } while (true);
 
         return inputValue;
@@ -173,7 +182,7 @@ public class GameProcess {
      * @param players игроки
      * @return да или нет
      */
-    static private boolean isThereWinner(List<Player> players) {
+    private static boolean isThereWinner(List<Player> players) {
         for (Player player : players) {
             if (player.getScore() == winningScore) return true;
         }
@@ -186,7 +195,7 @@ public class GameProcess {
      * @param players список игроков
      * @return список победителей
      */
-    static private List<Player> getWinners(List<Player> players) {
+    private static List<Player> getWinners(List<Player> players) {
         int maxNumberOfBeaten = getMaxNumberOfBeaten(players);
         List<Player> winners = new ArrayList<>();
 
@@ -209,7 +218,7 @@ public class GameProcess {
      * Добавляем очки всем победителям из списка
      * @param winners список победителей в текущем раунде
      */
-    static private void addPointsToWinners(List<Player> winners) {
+    private static void addPointsToWinners(List<Player> winners) {
         for (Player winner: winners) {
             winner.addScore(1);
         }
@@ -220,7 +229,7 @@ public class GameProcess {
      * @param players список игроков
      * @param winners список победителей раунда
      */
-    static private void printRoundInfo(List<Player> players, List<Player> winners) {
+    private static void printRoundInfo(List<Player> players, List<Player> winners) {
 
         for (Player player : players) {
             System.out.println(player);
@@ -246,7 +255,7 @@ public class GameProcess {
      * @param players список игроков
      * @return максимум выбитых
      */
-    static private int getMaxNumberOfBeaten(List<Player> players) {
+    private static int getMaxNumberOfBeaten(List<Player> players) {
         int maxNumberOfBeaten = -1;
 
         for (Player player : players) {

@@ -19,9 +19,11 @@ public class InitGameParameters {
      * Дефолтные константы для быстрой игры:
      * Число очков для победы
      * Количество игроков
+     * Задержка в мсек
      */
     static final int MAX_SCORE = 3;
     static final int NUMBER_OF_PLAYERS = 3;
+    static final int DELAY_MSEC = 500;
 
     static {
         setShapeOptions();
