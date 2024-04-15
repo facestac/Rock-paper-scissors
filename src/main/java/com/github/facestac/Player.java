@@ -33,8 +33,17 @@ public class Player {
     /**
      * геттеры и сеттеры
      */
+    public void setShape(int shapeNumber) {
+        if (shapeNumber >= 0 & shapeNumber < InitGameParameters.shapeList.size())
+            shape = InitGameParameters.shapeList.get(shapeNumber);
+    }
+
     public void setShape() {
         shape = InitGameParameters.shapeList.get(getShapeNumber());
+    }
+
+    public Shape getShape() {
+        return shape;
     }
 
     public String getName() {
