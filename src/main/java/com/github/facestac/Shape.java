@@ -1,17 +1,26 @@
 package com.github.facestac;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Shape {
-    private String name;
-    private ArrayList<String> beatsList = new ArrayList<>();
+    private ShapeType name;
+    protected ArrayList<ShapeType> beatsList;
 
-    Shape(String name, ArrayList<String> beatsList) {
+    Shape(ShapeType name) {
         this.name = name;
-        this.beatsList = beatsList;
+        beatsList = new ArrayList<>();
     }
 
-    boolean isBeatsOtherShape(Shape other) {
+    public ShapeType getName() {
+        return name;
+    }
+
+    public boolean isEqualsShape(Shape other) {
+        return name == other.name;
+    }
+
+    public boolean isBeatsOtherShape(Shape other) {
         return beatsList.contains(other.name);
     }
 }

@@ -1,8 +1,11 @@
 package com.github.facestac;
 
+import java.util.ArrayList;
+
 public abstract class Player {
     private final String name;
     private Integer score = 0;
+    private Shape shape;
 
     Player(String name) {
         this.name = name;
@@ -20,5 +23,22 @@ public abstract class Player {
         return score;
     }
 
-    public abstract String drawShape();
+    public Shape getShape() {
+        return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+    public boolean isWonSomeone(ArrayList<Player> otherList) {
+        for (Player other: otherList) {
+            if (shape.isEqualsShape(other.shape)) continue;
+            if (shape.isBeatsOtherShape(other.shape)) return true;
+         }
+        return false;
+    }
+
+    public abstract Shape drawShape();
+
 }
