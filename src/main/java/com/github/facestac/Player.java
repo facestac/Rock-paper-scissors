@@ -8,7 +8,17 @@ public abstract class Player {
         this.name = name;
     }
 
-    public abstract String drawShape() {
-
+    public String getName() {
+        return name;
     }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public abstract String drawShape();
 }
