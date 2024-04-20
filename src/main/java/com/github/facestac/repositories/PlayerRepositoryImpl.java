@@ -48,6 +48,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
             player.setId(idSequence.getAndIncrement());
             players.put(player.getId(), player);
 
+            System.out.printf("id: %d\n", player.getId());
             return player.getId();
         }
 
