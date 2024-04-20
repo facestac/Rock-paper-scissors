@@ -19,6 +19,5 @@ package com.github.facestac;
  */
 public class Main {
     public static void main(String[] args) {
-        GameProcess.startGame();
-    }
+        System.out.printf("Show must go %s!", "ON");    }
 }
