@@ -3,15 +3,23 @@ package com.github.facestac;
 import java.util.ArrayList;
 
 public abstract class Shape {
-    private String name;
-    private ArrayList<String> beatsList = new ArrayList<>();
+    private ShapeType name;
+    protected ArrayList<ShapeType> beatsList;
 
-    Shape(String name, ArrayList<String> beatsList) {
+    Shape(ShapeType name) {
         this.name = name;
-        this.beatsList = beatsList;
+        beatsList = new ArrayList<>();
     }
 
-    boolean isBeatsOtherShape(Shape other) {
-        return beatsList.contains(other.name);
+    public ShapeType getName() {
+        return name;
+    }
+
+    public boolean isEqualsShape(Shape another) {
+        return this.name == another.name;
+    }
+
+    public boolean isBeatsOtherShape(Shape another) {
+        return beatsList.contains(another.name);
     }
 }
