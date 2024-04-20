@@ -1,4 +1,4 @@
-package com.github.facestac;
+package com.github.facestac.entities;
 
 /**
  * Класс описывает фигуру (жест)
@@ -7,33 +7,33 @@ public class Shape {
     /**
     * Название фигуры (жеста), которое выкидывает игрок
      * */
-    private final ShapesEnum name;
+    private final ShapeType name;
 
     /**
      * Список фигур, которые можно побить
      */
-    private ShapesEnum[] beatsList;
+    private ShapeType[] beatsList;
 
     /**
      * Конструктор класса
      * @param name имя фигуры
      */
-    Shape(ShapesEnum name) {
+    Shape(ShapeType name) {
         this.name = name;
     }
 
     /**
      * геттеры и сеттеры
      */
-    public ShapesEnum[] getBeatsList() {
+    public ShapeType[] getBeatsList() {
         return beatsList;
     }
 
-    public void setBeatsList(ShapesEnum[] beatsList) {
+    public void setBeatsList(ShapeType[] beatsList) {
         this.beatsList = beatsList;
     }
 
-    public ShapesEnum getName() {
+    public ShapeType getName() {
         return name;
     }
 }
