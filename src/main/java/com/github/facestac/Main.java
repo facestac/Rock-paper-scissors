@@ -11,12 +11,12 @@ public class Main {
 
     public static void main(String[] args){
 //        int playersCount = 2;
-        int maxScore = 2;
+//        int maxScore = 2;
         InitGameParameters initGP = new InitGameParameters();
         List<Player> players = initGP.addPlayersToGame();
 //        players.add(new BotPlayer("Bot1"));
 //        players.add(new BotPlayer("Bot2"));
-        GameProcess game = new GameProcess(players, maxScore);
+        GameProcess game = new GameProcess(players);
         game.startGame();
     }
 }

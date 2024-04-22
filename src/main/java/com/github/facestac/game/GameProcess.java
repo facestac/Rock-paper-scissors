@@ -2,44 +2,31 @@ package com.github.facestac.game;
 
 import com.github.facestac.models.Player;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameProcess {
-    private Map<Player, Integer> players;
-    private int maxScore;
+    private List<Player> players;
+    private final int maxScore = 2;
 
-    public GameProcess(List<Player> players, int maxScore) {
-        this.players  = new HashMap<>((HashMap) List.of(players));
-//        this.players = players;
-        this.maxScore = maxScore;
-
-//        gameProcess();
+    public GameProcess(List<Player> players) {
+        this.players = players;
+//        this.maxScore = maxScore;
     }
 
     public void startGame() {
         boolean isGameOver = false;
-        while (isGameOver) {
-            gameLoop();
+        GameJudge judge = new GameJudge(players);
+
+        while (!isGameOver) {
+            GameRound gr = new GameRound(players);
+//            judge(gr.getPlayers());
+            isGameOver = true;
         }
+
     }
 
-    private void gameLoop() {
-        spawnShapes();
-    }
 
-    private void spawnShapes() {
-        for (Map<Player, Integer> player : players) {
-//            player.selectShape();
-        }
-    }
 
-    private printGameINfo() {
-        for (Player player : players) {
-            System.out.println(player.getName() + " : " + );
-        }
-    }
 
 
 
@@ -58,25 +45,7 @@ public class GameProcess {
 //
 //        game.printWinner(players);
 //    }
-//
-//
-//    private ArrayList<Player> createPlayers(int playersCount) {
-//        ArrayList<Player> players = new ArrayList<>();
-//
-//        for (int i = 0; i < playersCount; i++) {
-//            Player player = new PlayerBot("Bot" + (i + 1));
-//            players.add(player);
-//        }
-//
-//        return players;
-//    }
-//
-//    private void drawShapes(ArrayList<Player> players) {
-//        for (Player player : players) {
-//            player.setShape(player.drawShape());
-////            System.out.println(player.getShape().getName());
-//        }
-//    }
+
 //
 //    private void printWinner(ArrayList<Player> players) {
 //        boolean isThereWinner = false;

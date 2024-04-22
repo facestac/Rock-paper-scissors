@@ -9,7 +9,7 @@ import java.util.List;
 import static com.github.facestac.types.ShapeType.*;
 
 public class ShapeFactory {
-    public Shape createShape (ShapeType type) {
+    public static Shape createShape(ShapeType type) {
 
         return switch(type) {
             case ROCK -> new Shape(ROCK, new HashSet<>(List.of(SCISSORS)));
