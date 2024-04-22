@@ -1,15 +1,21 @@
 package com.github.facestac;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+//import java.util.List;
+import java.util.Set;
 
 public abstract class Shape {
     private ShapeType name;
-    protected ArrayList<ShapeType> beatsList;
+    protected Set<ShapeType> beatsList;
 
     Shape(ShapeType name) {
         this.name = name;
-        beatsList = new ArrayList<>();
+        beatsList = new HashSet<>();
+    }
+
+    Shape(ShapeType name, Set<ShapeType> beatsList) {
+        this.name = name;
+        this.beatsList = beatsList;
     }
 
     public ShapeType getName() {
