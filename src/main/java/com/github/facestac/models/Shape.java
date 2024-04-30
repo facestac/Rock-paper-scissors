@@ -13,4 +13,17 @@ public class Shape {
         this.beatsList = beatsList;
     }
 
+    public ShapeType getType() {
+        return type;
+    }
+
+    public boolean isBeats(Shape another) {
+        if (isSameShape(another)) return false;
+
+        return this.beatsList.contains(another.getType());
+    }
+
+    private boolean isSameShape(Shape another) {
+        return this.type == another.type;
+    }
 }
