@@ -6,20 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameProcess {
-    private Map<Player, Integer> players;
-    private int maxScore;
+public class Game {
+    private List<Player> players;
 
-    public GameProcess(List<Player> players, int maxScore) {
-        this.players  = new HashMap<>((HashMap) List.of(players));
-//        this.players = players;
-        this.maxScore = maxScore;
-
-//        gameProcess();
-    }
 
     public void startGame() {
         boolean isGameOver = false;
+        InitGame ig = new InitGame();
+        players = ig.getPlayers();
         while (isGameOver) {
             gameLoop();
         }
@@ -30,9 +24,7 @@ public class GameProcess {
     }
 
     private void spawnShapes() {
-        for (Map<Player, Integer> player : players) {
-//            player.selectShape();
-        }
+
     }
 
     private printGameINfo() {

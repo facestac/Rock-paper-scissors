@@ -1,16 +1,16 @@
 package com.github.facestac.models;
 
 import com.github.facestac.types.ShapeType;
-
 import java.util.Scanner;
 
 public class HumanPlayer extends Player{
-    private static final Scanner scanner = new Scanner(System.in);
 
     @Override
     public ShapeType selectShape() {
         printShapeTypes();
+        Scanner scanner = new Scanner(System.in);
         int inputValue = scanner.nextInt();
+        scanner.close();
         return ShapeType.values()[inputValue];
     }
 

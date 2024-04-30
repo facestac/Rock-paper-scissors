@@ -1,7 +1,6 @@
 package com.github.facestac.models;
 
 import com.github.facestac.types.ShapeType;
-
 import java.util.Random;
 
 public class BotPlayer extends Player{
