@@ -1,4 +1,4 @@
-package com.github.facestac;
+package com.github.facestac.types;
 
 public enum ShapeType {
     ROCK,
