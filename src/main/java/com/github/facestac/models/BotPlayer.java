@@ -1,17 +1,22 @@
 package com.github.facestac.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.facestac.types.ShapeType;
 import java.util.Random;
 
 public class BotPlayer extends Player{
     private static final Random random = new Random();
 
-    public BotPlayer() {
-        super();
+    public BotPlayer(int id) {
+        super(id);
     }
 
-    public BotPlayer(String name) {
-        super(name);
+    public BotPlayer(int id, String name) {
+        super(id, name);
+    }
+
+    public BotPlayer(int id, String name, int totalGames, int totalWins) {
+        super(id, name, totalGames, totalWins);
     }
 
     @Override

@@ -5,12 +5,25 @@ import java.util.Scanner;
 
 public class HumanPlayer extends Player{
 
+    public HumanPlayer(int id) {
+        super(id);
+    }
+
+    public HumanPlayer(int id, String name) {
+        super(id, name);
+    }
+
+    public HumanPlayer(int id, String name, int totalGames, int totalWins) {
+        super(id, name, totalGames, totalWins);
+    }
+
     @Override
     public ShapeType selectShape() {
         printShapeTypes();
         Scanner scanner = new Scanner(System.in);
         int inputValue = scanner.nextInt();
         scanner.close();
+
         return ShapeType.values()[inputValue];
     }
 

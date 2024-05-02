@@ -3,6 +3,7 @@ package com.github.facestac.game;
 import com.github.facestac.models.BotPlayer;
 import com.github.facestac.models.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,16 +41,25 @@ public class InitGame {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
-
-
-
-
+    
     private List<Player> addPlayersToGame() {
-        List<Player> players = new ArrayList<>();
-        for (int i = 0; i < countPlayers; i++) {
-            players.add(new BotPlayer("Bot" + (i + 1)));
-        }
+        ;
 
+        List<Player> playersList = new PlayerResults().loadPlayersResult();
+        List<Player> players = new ArrayList<>();
+
+        if (playersList == null) {
+            for (int i = 0; i < countPlayers; i++) {
+                int id = i + 1;
+                players.add(new BotPlayer(id, "Bot" + id));
+            }
+        } else {
+            for (Player player : playersList) {
+//                if (player instanceof BotPlayer) System.out.println(player.getId());
+                players.add(new BotPlayer(player.getId(), player.getName(), player.getTotalGames(), player.getTotalWins()));
+            }
+            System.out.println(players);
+        }
         return players;
     }
 }
