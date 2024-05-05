@@ -1,8 +1,9 @@
 package com.github.facestac.player;
 
-public class PlayerGameStatistics {
+public class PlayerStatistics {
     private int totalGames = 0;
     private int totalWins = 0;
+
 
     public int getTotalWins() {
         return totalWins;
@@ -18,5 +19,11 @@ public class PlayerGameStatistics {
 
     public void setTotalGames(int totalGames) {
         this.totalGames = totalGames;
+    }
+
+    @Override
+    public String toString() {
+        return "totalGames = " + totalGames +
+                ", totalWins = " + totalWins;
     }
 }

@@ -1,21 +1,19 @@
 package com.github.facestac.player;
 
+import com.github.facestac.player.shape.Shape;
+
 import java.util.Random;
 
 public class BotPlayer extends Player{
     private static final Random random = new Random();
 
-    public BotPlayer(int id) {
-        super(id);
+    public BotPlayer(String name) {
+        super(name);
     }
 
-    public BotPlayer(int id, String name) {
-        super(id, name);
+    @Override
+    public Shape selectShape() {
+        int randomValue = random.nextInt(Shape.values().length);
+        return Shape.values()[randomValue];
     }
-
-//    @Override
-//    public ShapeType selectShape() {
-//        int randomValue = random.nextInt(ShapeType.values().length);
-//        return ShapeType.values()[randomValue];
-//    }
 }

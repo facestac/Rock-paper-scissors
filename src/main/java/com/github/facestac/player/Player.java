@@ -1,32 +1,21 @@
 package com.github.facestac.player;
 
 
-import com.github.facestac.shape.Shape;
+import com.github.facestac.player.shape.Shape;
 
 public abstract class Player {
-    private int id;
     private String name;
     private Shape shape;
     private int currentScore;
-    private PlayerGameStatistics gameStatistics;
+    private PlayerStatistics playerStatistics;
 
-    Player(int id) {
-        this(id, "UnknownPlayer");
+    Player() {
+        this("UnknownPlayer");
     }
 
-    Player(int id, String name) {
-        this.id = id;
+    Player(String name) {
         this.name = name;
-    }
-
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        playerStatistics = new PlayerStatistics();
     }
 
     public String getName() {
@@ -52,4 +41,14 @@ public abstract class Player {
     public void setCurrentScore(int currentScore) {
         this.currentScore = currentScore;
     }
+
+    public PlayerStatistics getPlayerStatistics() {
+        return playerStatistics;
+    }
+
+    public void setPlayerStatistics(PlayerStatistics playerStatistics) {
+        this.playerStatistics = playerStatistics;
+    }
+
+    public abstract Shape selectShape();
 }

@@ -1,29 +1,29 @@
 package com.github.facestac.player;
 
+import com.github.facestac.player.shape.Shape;
+
+import java.util.Scanner;
+
 public class HumanPlayer extends Player{
 
-    public HumanPlayer(int id) {
-        super(id);
+    public HumanPlayer(String name) {
+        super(name);
     }
 
-    public HumanPlayer(int id, String name) {
-        super(id, name);
+    @Override
+    public Shape selectShape() {
+        printShapeType();
+        Scanner scanner = new Scanner(System.in);
+        int inputValue = scanner.nextInt();
+        scanner.close();
+
+        return Shape.values()[inputValue];
     }
 
-//    @Override
-//    public ShapeType selectShape() {
-//        printShapeTypes();
-//        Scanner scanner = new Scanner(System.in);
-//        int inputValue = scanner.nextInt();
-//        scanner.close();
-//
-//        return ShapeType.values()[inputValue];
-//    }
-
-//    private void printShapeTypes() {
-//        System.out.println("Choose shape type:");
-//        for (int i = 0; i < ShapeType.values().length; i++) {
-//            System.out.println((i + 1) + " - " + ShapeType.values()[i]);
-//        }
-//    }
+    private void printShapeType() {
+        System.out.println("Choose shape type:");
+        for (int i = 0; i < Shape.values().length; i++) {
+            System.out.println((i + 1) + " - " + Shape.values()[i]);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.github.facestac.shape;
+package com.github.facestac.player.shape;
 
 
 import java.util.HashSet;

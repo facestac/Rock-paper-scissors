@@ -1,41 +1,45 @@
 package com.github.facestac.game;
 
-import com.github.facestac.IOStream.InputOutputStream;
-import com.github.facestac.IOStream.InputOutputJson;
 import com.github.facestac.gameOptions.GameOptions;
+import com.github.facestac.leaderboard.Leaderboard;
 import com.github.facestac.player.Player;
+import com.github.facestac.player.PlayerStatistics;
+
 import java.util.List;
 
 public class Game {
-    private List<Player> players;
-    private int maxScore;
+    private final GameOptions gameOptions;
+    private final Leaderboard leaderboard;
+
+    public Game(GameOptions gameOptions, Leaderboard leaderboard) {
+        this.gameOptions = gameOptions;
+        this.leaderboard = leaderboard;
+    }
 
     public void startGame()  {
-        Game game = new Game();
-        game.setGameParameters();
+        int pointsForVictory = gameOptions.getPointsForVictory();
+        List<Player> players = gameOptions.getListOfPlayers();
+        resetGamePoints(players);
 
-        InputOutputStream json = new InputOutputJson();
-        json.saveData(players);
-        game.gameProcess();
+        gameProcess(players, pointsForVictory);
     }
 
-    private void setGameParameters() {
-        GameOptions ig = new GameOptions();
-        players = ig.getPlayers();
-        maxScore = ig.getMaxScore();
+    private void resetGamePoints(List<Player> players) {
+        for (Player player : players) {
+            player.setCurrentScore(0);
+        }
     }
 
-
-    private void gameProcess() {
-        GameRound gr = new GameRound(players);
+    private void gameProcess(List<Player> players, int pointsForVictory) {
+        Round round = new Round(players);
         boolean isGameOver = false;
 
         while (!isGameOver) {
-            Player winner = gr.playRound();
-            if (winner != null && winner.getCurrentScore() == maxScore) {
+            Player winner = round.playRoundAndGetWinner();
+            if (winner != null && winner.getCurrentScore() == pointsForVictory) {
                 isGameOver = true;
                 printGameWinner(winner);
-                savePlayerStatistics(winner);
+                updatePlayersStatistics(players, winner);
             }
         }
 
@@ -45,13 +49,14 @@ public class Game {
         System.out.println(winner.getName() + " WINS game!");
     }
 
-    private void savePlayerStatistics(Player winner) {
+    private void updatePlayersStatistics(List<Player> players, Player winner) {
         for (Player player : players) {
-            player.setTotalGames(player.getTotalGames() + 1);
-        }
-        winner.setTotalWins(winner.getTotalWins() + 1);
+            PlayerStatistics stats = player.getPlayerStatistics();
+            stats.setTotalGames(stats.getTotalGames() + 1);
 
-        PlayerResults pr = new PlayerResults();
-        pr.savePlayersResult(players);
+            if (player.equals(winner)) stats.setTotalWins(stats.getTotalWins() + 1);
+        }
+
+        leaderboard.updateData(players);
     }
 }

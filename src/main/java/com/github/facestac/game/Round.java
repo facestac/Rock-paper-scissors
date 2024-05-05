@@ -1,23 +1,23 @@
 package com.github.facestac.game;
 
 import com.github.facestac.player.Player;
+import com.github.facestac.player.shape.Shape;
 
 import java.util.*;
 
-public class GameRound {
-    private List<Player> players;
-    private int roundNumber = 1;
+public class Round {
+    private final List<Player> players;
+    private int roundNumber;
 
-    GameRound(List<Player> players) {
+    Round(List<Player> players) {
+        roundNumber = 1;
         this.players = players;
     }
 
-    public Player playRound() {
+    public Player playRoundAndGetWinner() {
         generateShapes();
 
-        GameJudge judge = new GameJudge();
-        Player winner = judge.getWinners(players);
-        if (winner != null) winner.setCurrentScore(winner.getCurrentScore() + 1);
+        Player winner = getRoundWinner();
 
         printRoundInfo(winner);
 
@@ -26,16 +26,24 @@ public class GameRound {
 
     private void generateShapes() {
         for (Player player : players) {
-//            ShapeType type = player.selectShape();
-//            Shape shape = ShapeFactory.createShape(type);
-//            player.setShape(shape);
+            Shape shape = player.selectShape();
+            player.setShape(shape);
         }
+    }
+
+    private Player getRoundWinner() {
+        GameReferee referee = new GameReferee();
+        Player winner = referee.getWinners(players);
+
+        if (winner != null) winner.setCurrentScore(winner.getCurrentScore() + 1);
+
+        return winner;
     }
 
     private void printRoundInfo(Player winner) {
         System.out.println("\nROUND " + roundNumber++);
         for (Player player : players) {
-//            System.out.println(player.getName() + " : " + player.getShape().getType());
+            System.out.println(player.getName() + " : " + player.getShape());
         }
         printRoundWinner(winner);
         printScore();
