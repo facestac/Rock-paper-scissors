@@ -1,7 +1,6 @@
 package com.github.facestac.IOStream;
 
-import com.github.facestac.models.BotPlayer;
-import com.github.facestac.models.Player;
+import com.github.facestac.player.Player;
 
 import java.util.List;
 

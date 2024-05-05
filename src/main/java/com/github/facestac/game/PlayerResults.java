@@ -2,7 +2,7 @@ package com.github.facestac.game;
 
 import com.github.facestac.IOStream.InputOutputStream;
 import com.github.facestac.IOStream.InputOutputJson;
-import com.github.facestac.models.Player;
+import com.github.facestac.player.Player;
 
 import java.util.List;
 

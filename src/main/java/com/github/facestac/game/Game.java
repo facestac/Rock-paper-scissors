@@ -2,7 +2,8 @@ package com.github.facestac.game;
 
 import com.github.facestac.IOStream.InputOutputStream;
 import com.github.facestac.IOStream.InputOutputJson;
-import com.github.facestac.models.Player;
+import com.github.facestac.gameOptions.GameOptions;
+import com.github.facestac.player.Player;
 import java.util.List;
 
 public class Game {
@@ -19,7 +20,7 @@ public class Game {
     }
 
     private void setGameParameters() {
-        InitGame ig = new InitGame();
+        GameOptions ig = new GameOptions();
         players = ig.getPlayers();
         maxScore = ig.getMaxScore();
     }

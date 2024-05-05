@@ -1,9 +1,7 @@
 package com.github.facestac.game;
 
-import com.github.facestac.factories.ShapeFactory;
-import com.github.facestac.models.Player;
-import com.github.facestac.models.Shape;
-import com.github.facestac.types.ShapeType;
+import com.github.facestac.player.Player;
+
 import java.util.*;
 
 public class GameRound {
@@ -28,16 +26,16 @@ public class GameRound {
 
     private void generateShapes() {
         for (Player player : players) {
-            ShapeType type = player.selectShape();
-            Shape shape = ShapeFactory.createShape(type);
-            player.setShape(shape);
+//            ShapeType type = player.selectShape();
+//            Shape shape = ShapeFactory.createShape(type);
+//            player.setShape(shape);
         }
     }
 
     private void printRoundInfo(Player winner) {
         System.out.println("\nROUND " + roundNumber++);
         for (Player player : players) {
-            System.out.println(player.getName() + " : " + player.getShape().getType());
+//            System.out.println(player.getName() + " : " + player.getShape().getType());
         }
         printRoundWinner(winner);
         printScore();

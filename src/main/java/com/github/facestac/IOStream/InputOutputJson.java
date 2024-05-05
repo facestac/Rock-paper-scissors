@@ -2,7 +2,7 @@ package com.github.facestac.IOStream;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.facestac.models.Player;
+import com.github.facestac.player.Player;
 
 import java.io.*;
 import java.util.List;

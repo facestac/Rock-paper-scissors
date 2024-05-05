@@ -1,18 +1,18 @@
-package com.github.facestac.game;
+package com.github.facestac.gameOptions;
 
-import com.github.facestac.models.BotPlayer;
-import com.github.facestac.models.Player;
+import com.github.facestac.game.PlayerResults;
+import com.github.facestac.player.BotPlayer;
+import com.github.facestac.player.Player;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitGame {
+public class GameOptions {
     private int countPlayers;
     private int maxScore;
     private List<Player> players;
 
-    InitGame() {
+    GameOptions() {
         countPlayers = 2;
         maxScore = 3;
         players = addPlayersToGame();
@@ -56,7 +56,7 @@ public class InitGame {
         } else {
             for (Player player : playersList) {
 //                if (player instanceof BotPlayer) System.out.println(player.getId());
-                players.add(new BotPlayer(player.getId(), player.getName(), player.getTotalGames(), player.getTotalWins()));
+//                players.add(new BotPlayer(player.getId(), player.getName(), player.getTotalGames(), player.getTotalWins()));
             }
             System.out.println(players);
         }
