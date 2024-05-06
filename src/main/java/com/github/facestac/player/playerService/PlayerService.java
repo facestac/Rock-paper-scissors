@@ -5,7 +5,7 @@ import com.github.facestac.player.PlayerView;
 
 import java.util.List;
 
-public interface playerService {
+public interface PlayerService {
 
     List<PlayerView> convertPlayerListToPlayerViewList(List<Player> playerList);
 

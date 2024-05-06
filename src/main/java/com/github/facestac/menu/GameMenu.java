@@ -78,14 +78,6 @@ public class GameMenu {
     }
 
     private void showLeaderboard() {
-        List<PlayerView> playerViewList = leaderboard.loadData();
-
-        if (playerViewList == null || playerViewList.isEmpty()) {
-            System.out.println("Leaderboard is empty");
-        } else {
-            for (PlayerView player : playerViewList) {
-                System.out.println(player);
-            }
-        }
+        leaderboard.printLeaderboard();
     }
 }

@@ -57,6 +57,6 @@ public class Game {
             if (player.equals(winner)) stats.setTotalWins(stats.getTotalWins() + 1);
         }
 
-        leaderboard.updateData(players);
+        leaderboard.updateLeaderboard(players);
     }
 }

@@ -7,7 +7,7 @@ import com.github.facestac.player.PlayerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerServiceImpl {
+public class PlayerServiceImpl implements PlayerService{
     public List<PlayerView> convertPlayerListToPlayerViewList(List<Player> playerList) {
         List<PlayerView> playerViewList = new ArrayList<>();
 

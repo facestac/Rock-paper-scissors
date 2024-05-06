@@ -4,12 +4,11 @@ import com.github.facestac.player.Player;
 import com.github.facestac.player.PlayerView;
 
 import java.util.List;
-import java.util.Map;
 
 public interface Leaderboard {
-    List<PlayerView> loadData();
+    List<PlayerView> getLeaderboard();
 
-    void updateData(List<Player> players);
+    void updateLeaderboard(List<Player> players);
 
-    void saveData(List<Player> players);
+    void printLeaderboard();
 }

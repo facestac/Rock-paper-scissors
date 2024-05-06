@@ -1,6 +1,8 @@
 package com.github.facestac.exception;
 
-public class FileNotFoundException extends RuntimeException {
+import java.io.IOException;
+
+public class FileNotFoundException extends IOException {
     public FileNotFoundException(String message) {
         super(message);
     }
